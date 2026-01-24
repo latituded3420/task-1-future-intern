@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
@@ -26,20 +27,32 @@ const Hero = () => {
           
           {/* Main heading */}
           <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-            Digital Marketing That Helps Your Business{" "}
-            <span className="text-accent">Get More Customers</span>
+            We Help Local Businesses Get More Leads Through{" "}
+            <span className="text-accent">Clear, High-Converting Websites</span>
           </h1>
           
           {/* Subheading */}
           <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-up" style={{ animationDelay: '0.3s' }}>
-            BrightPixel Digital is a Bangalore-based digital marketing agency helping local businesses and startups turn their website into a consistent source of leads. We design, optimize, and promote websites that support real business goals—not vanity metrics.
+            Done-for-you websites and digital marketing for business owners who want results, not confusion.
           </p>
           
-          {/* CTA Button */}
-          <div className="animate-fade-up" style={{ animationDelay: '0.4s' }}>
-            <Button variant="hero" size="xl" className="group">
-              Get a Free Consultation
-              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.4s' }}>
+            <Button variant="hero" size="xl" className="group" asChild>
+              <Link to="/contact">
+                Book a Free Discovery Call
+                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+              </Link>
+            </Button>
+            <Button 
+              variant="heroOutline" 
+              size="xl" 
+              className="border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground hover:text-primary"
+              asChild
+            >
+              <Link to="/services">
+                View Our Services
+              </Link>
             </Button>
           </div>
         </div>

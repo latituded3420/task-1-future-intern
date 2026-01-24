@@ -2,7 +2,7 @@ import { Check } from "lucide-react";
 
 const reasons = [
   "Based in Bangalore, working closely with local businesses",
-  "Clear communication—no technical confusion",
+  "Clear communication — no technical confusion",
   "Practical strategies focused on leads and enquiries",
   "Honest recommendations, even if it means doing less",
 ];
@@ -14,6 +14,7 @@ const WhyBrightPixel = () => {
         <div className="max-w-4xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
+              <p className="text-accent font-medium mb-4">A Simple, Transparent Process</p>
               <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-6">
                 Why <span className="text-accent">BrightPixel</span> Digital
               </h2>
@@ -41,7 +42,7 @@ const WhyBrightPixel = () => {
                     BP
                   </div>
                   <div className="text-primary-foreground/80 text-sm tracking-wider uppercase">
-                    BrightPixel Digital
+                    Trusted by Local Business Owners
                   </div>
                 </div>
                 
