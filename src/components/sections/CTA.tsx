@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, MapPin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const CTA = () => {
   return (
@@ -13,17 +14,24 @@ const CTA = () => {
       <div className="container px-4 relative z-10">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-            Let's Talk About Your{" "}
-            <span className="text-accent">Business Goals</span>
+            Book a Free Discovery Call and{" "}
+            <span className="text-accent">See If We're a Good Fit</span>
           </h2>
           
-          <p className="text-lg text-primary-foreground/70 mb-10 max-w-xl mx-auto">
-            If you're looking for a dependable digital partner who understands business—not just marketing—let's have a conversation.
+          <p className="text-lg text-primary-foreground/70 mb-4 max-w-xl mx-auto">
+            A simple, transparent process trusted by local business owners.
           </p>
           
-          <Button variant="hero" size="xl" className="group">
-            Schedule a Free Consultation
-            <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+          <div className="flex items-center justify-center gap-2 text-accent mb-10">
+            <MapPin className="w-5 h-5" />
+            <span className="font-medium">Based in Bangalore — Quick Support and Local Market Understanding</span>
+          </div>
+          
+          <Button variant="hero" size="xl" className="group" asChild>
+            <Link to="/contact">
+              Schedule Your Free Call
+              <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+            </Link>
           </Button>
         </div>
       </div>
