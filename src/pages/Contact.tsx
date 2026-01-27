@@ -6,8 +6,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Mail, Phone, ArrowRight, Check } from "lucide-react";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
+import { z } from "zod";
+
+const contactSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(100, "Name is too long"),
+  email: z.string().trim().email("Please enter a valid email address"),
+  phone: z.string().trim().min(10, "Please enter a valid phone number").max(15, "Phone number is too long"),
+  business: z.string().trim().max(200, "Business name is too long").optional(),
+  message: z.string().trim().min(10, "Please tell us a bit more about how we can help").max(1000, "Message is too long")
+});
 
 const Contact = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -16,10 +29,42 @@ const Contact = () => {
     message: ''
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
+    setErrors({});
+    
+    const result = contactSchema.safeParse(formData);
+    
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((error) => {
+        if (error.path[0]) {
+          fieldErrors[error.path[0] as string] = error.message;
+        }
+      });
+      setErrors(fieldErrors);
+      return;
+    }
+
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    
+    toast({
+      title: "Thank you for reaching out!",
+      description: "We've received your message and will get back to you within 24 hours.",
+    });
+    
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      business: '',
+      message: ''
+    });
+    
+    setIsSubmitting(false);
   };
 
   return (
@@ -118,38 +163,41 @@ const Contact = () => {
               <div className="p-8 rounded-2xl bg-card border border-border">
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <Label htmlFor="name">Your Name</Label>
+                    <Label htmlFor="name">Your Name *</Label>
                     <Input 
                       id="name" 
                       placeholder="John Smith"
                       value={formData.name}
                       onChange={(e) => setFormData({...formData, name: e.target.value})}
-                      className="mt-2"
+                      className={`mt-2 ${errors.name ? 'border-destructive' : ''}`}
                     />
+                    {errors.name && <p className="text-sm text-destructive mt-1">{errors.name}</p>}
                   </div>
                   
                   <div>
-                    <Label htmlFor="email">Email Address</Label>
+                    <Label htmlFor="email">Email Address *</Label>
                     <Input 
                       id="email" 
                       type="email"
                       placeholder="john@company.com"
                       value={formData.email}
                       onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="mt-2"
+                      className={`mt-2 ${errors.email ? 'border-destructive' : ''}`}
                     />
+                    {errors.email && <p className="text-sm text-destructive mt-1">{errors.email}</p>}
                   </div>
                   
                   <div>
-                    <Label htmlFor="phone">Phone Number</Label>
+                    <Label htmlFor="phone">Phone Number *</Label>
                     <Input 
                       id="phone" 
                       type="tel"
                       placeholder="+91 98765 43210"
                       value={formData.phone}
                       onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                      className="mt-2"
+                      className={`mt-2 ${errors.phone ? 'border-destructive' : ''}`}
                     />
+                    {errors.phone && <p className="text-sm text-destructive mt-1">{errors.phone}</p>}
                   </div>
                   
                   <div>
@@ -164,20 +212,27 @@ const Contact = () => {
                   </div>
                   
                   <div>
-                    <Label htmlFor="message">How can we help?</Label>
+                    <Label htmlFor="message">How can we help? *</Label>
                     <Textarea 
                       id="message" 
                       placeholder="Tell us about your business and what you're looking to achieve..."
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({...formData, message: e.target.value})}
-                      className="mt-2"
+                      className={`mt-2 ${errors.message ? 'border-destructive' : ''}`}
                     />
+                    {errors.message && <p className="text-sm text-destructive mt-1">{errors.message}</p>}
                   </div>
                   
-                  <Button variant="hero" size="lg" className="w-full group" type="submit">
-                    Book My Free Discovery Call
-                    <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                  <Button 
+                    variant="hero" 
+                    size="lg" 
+                    className="w-full group" 
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Book My Free Discovery Call"}
+                    {!isSubmitting && <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />}
                   </Button>
                   
                   <p className="text-sm text-muted-foreground text-center">
