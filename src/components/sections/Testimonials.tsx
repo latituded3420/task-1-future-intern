@@ -1,4 +1,5 @@
 import { Quote } from "lucide-react";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 const testimonials = [
   {
@@ -28,7 +29,7 @@ const Testimonials = () => {
   return (
     <section className="py-20 md:py-28 bg-subtle">
       <div className="container px-4">
-        <div className="text-center mb-16">
+        <ScrollReveal className="text-center mb-16">
           <span className="inline-block px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-4">
             Client Stories
           </span>
@@ -38,34 +39,35 @@ const Testimonials = () => {
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Real results from real businesses in Bangalore
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {testimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-lg flex flex-col"
-            >
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
-                <Quote className="w-6 h-6 text-accent" />
-              </div>
-              
-              <p className="text-foreground mb-6 flex-grow leading-relaxed">
-                "{testimonial.quote}"
-              </p>
-              
-              <div className="pt-6 border-t border-border">
-                <div className="flex items-center justify-between mb-3">
-                  <div>
-                    <p className="font-semibold text-foreground">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.business}, {testimonial.location}</p>
+            <ScrollReveal key={index} delay={index * 0.15}>
+              <div 
+                className="p-8 rounded-2xl bg-card border border-border hover:border-accent/30 transition-all duration-300 hover:shadow-lg flex flex-col h-full"
+              >
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-6">
+                  <Quote className="w-6 h-6 text-accent" />
+                </div>
+                
+                <p className="text-foreground mb-6 flex-grow leading-relaxed">
+                  "{testimonial.quote}"
+                </p>
+                
+                <div className="pt-6 border-t border-border">
+                  <div className="flex items-center justify-between mb-3">
+                    <div>
+                      <p className="font-semibold text-foreground">{testimonial.name}</p>
+                      <p className="text-sm text-muted-foreground">{testimonial.business}, {testimonial.location}</p>
+                    </div>
+                  </div>
+                  <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
+                    {testimonial.result}
                   </div>
                 </div>
-                <div className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-sm font-medium">
-                  {testimonial.result}
-                </div>
               </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
       </div>

@@ -1,4 +1,5 @@
 import { Lightbulb, Settings, Zap } from "lucide-react";
+import ScrollReveal from "@/components/ui/scroll-reveal";
 
 const steps = [
   {
@@ -25,14 +26,14 @@ const HowWeWork = () => {
   return (
     <section className="py-20 md:py-28 bg-background">
       <div className="container px-4">
-        <div className="max-w-3xl mx-auto text-center mb-16">
+        <ScrollReveal className="max-w-3xl mx-auto text-center mb-16">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
             How We Work
           </h2>
           <p className="text-lg text-muted-foreground">
             A simple, transparent process that puts your business first.
           </p>
-        </div>
+        </ScrollReveal>
 
         <div className="max-w-4xl mx-auto">
           <div className="relative">
@@ -41,26 +42,30 @@ const HowWeWork = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {steps.map((step, index) => (
-                <div key={index} className="relative text-center">
-                  {/* Number badge */}
-                  <div className="relative z-10 w-16 h-16 mx-auto mb-6 rounded-full bg-accent flex items-center justify-center shadow-lg">
-                    <span className="font-display font-bold text-accent-foreground">{step.number}</span>
+                <ScrollReveal key={index} delay={index * 0.2}>
+                  <div className="relative text-center">
+                    {/* Number badge */}
+                    <div className="relative z-10 w-16 h-16 mx-auto mb-6 rounded-full bg-accent flex items-center justify-center shadow-lg">
+                      <span className="font-display font-bold text-accent-foreground">{step.number}</span>
+                    </div>
+                    
+                    <h3 className="font-display text-lg font-bold text-foreground mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-muted-foreground">
+                      {step.description}
+                    </p>
                   </div>
-                  
-                  <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-muted-foreground">
-                    {step.description}
-                  </p>
-                </div>
+                </ScrollReveal>
               ))}
             </div>
           </div>
           
-          <p className="text-center text-accent font-medium mt-12">
-            You always know what's being done and why.
-          </p>
+          <ScrollReveal delay={0.6}>
+            <p className="text-center text-accent font-medium mt-12">
+              You always know what's being done and why.
+            </p>
+          </ScrollReveal>
         </div>
       </div>
     </section>

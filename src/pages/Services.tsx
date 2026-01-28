@@ -3,6 +3,8 @@ import Footer from "@/components/sections/Footer";
 import { Button } from "@/components/ui/button";
 import { Check, ArrowRight, Globe, Search, Target, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import ScrollReveal from "@/components/ui/scroll-reveal";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -71,17 +73,26 @@ const Services = () => {
             backgroundSize: '40px 40px'
           }} />
         </div>
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
+        <motion.div 
+          className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
+          animate={{ scale: [1, 1.1, 1], opacity: [0.2, 0.3, 0.2] }}
+          transition={{ duration: 8, repeat: Infinity }}
+        />
         
         <div className="container px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center">
+          <motion.div 
+            className="max-w-3xl mx-auto text-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-6">
               Our <span className="text-accent">Services</span>
             </h1>
             <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto">
               Focused digital marketing services that drive leads, clarity, and growth for local businesses.
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -96,7 +107,7 @@ const Services = () => {
                   index % 2 === 1 ? 'lg:flex-row-reverse' : ''
                 }`}
               >
-                <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
+                <ScrollReveal direction={index % 2 === 0 ? "left" : "right"} className={index % 2 === 1 ? 'lg:order-2' : ''}>
                   <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center mb-6">
                     <service.icon className="w-8 h-8 text-accent-foreground" />
                   </div>
@@ -120,9 +131,9 @@ const Services = () => {
                       ))}
                     </ul>
                   </div>
-                </div>
+                </ScrollReveal>
                 
-                <div className={`p-8 rounded-2xl bg-card border border-border ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <ScrollReveal direction={index % 2 === 0 ? "right" : "left"} delay={0.1} className={`p-8 rounded-2xl bg-card border border-border ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                   <h3 className="font-display text-lg font-bold text-foreground mb-6">
                     What's Included
                   </h3>
@@ -136,7 +147,7 @@ const Services = () => {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </ScrollReveal>
               </div>
             ))}
           </div>
@@ -146,31 +157,47 @@ const Services = () => {
       {/* CTA Section */}
       <section className="py-20 md:py-28 bg-hero relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent rounded-full blur-3xl -translate-x-1/2 translate-y-1/2" />
+          <motion.div 
+            className="absolute top-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"
+            animate={{ scale: [1, 1.1, 1] }}
+            transition={{ duration: 6, repeat: Infinity }}
+          />
+          <motion.div 
+            className="absolute bottom-0 left-0 w-64 h-64 bg-accent rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"
+            animate={{ scale: [1, 1.15, 1] }}
+            transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+          />
         </div>
         
         <div className="container px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-              Not Sure Which Service You Need?
-            </h2>
+            <ScrollReveal>
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+                Not Sure Which Service You Need?
+              </h2>
+            </ScrollReveal>
             
-            <p className="text-lg text-primary-foreground/70 mb-4 max-w-xl mx-auto">
-              Book a free discovery call and we'll help you identify the right approach for your business.
-            </p>
+            <ScrollReveal delay={0.1}>
+              <p className="text-lg text-primary-foreground/70 mb-4 max-w-xl mx-auto">
+                Book a free discovery call and we'll help you identify the right approach for your business.
+              </p>
+            </ScrollReveal>
             
-            <div className="flex items-center justify-center gap-2 text-accent mb-10">
-              <MapPin className="w-5 h-5" />
-              <span className="font-medium">Based in Bangalore — Quick Support and Local Market Understanding</span>
-            </div>
+            <ScrollReveal delay={0.2}>
+              <div className="flex items-center justify-center gap-2 text-accent mb-10">
+                <MapPin className="w-5 h-5" />
+                <span className="font-medium">Based in Bangalore — Quick Support and Local Market Understanding</span>
+              </div>
+            </ScrollReveal>
             
-            <Button variant="hero" size="xl" className="group" asChild>
-              <Link to="/contact">
-                Book Your Free Discovery Call
-                <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <ScrollReveal delay={0.3}>
+              <Button variant="hero" size="xl" className="group" asChild>
+                <Link to="/contact">
+                  Book Your Free Discovery Call
+                  <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </Button>
+            </ScrollReveal>
           </div>
         </div>
       </section>

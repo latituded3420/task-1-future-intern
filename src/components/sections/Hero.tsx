@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
@@ -14,30 +15,73 @@ const Hero = () => {
       </div>
       
       {/* Gradient orb */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl" />
+      <motion.div 
+        className="absolute top-1/4 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          opacity: [0.2, 0.3, 0.2]
+        }}
+        transition={{ 
+          duration: 8,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+      />
+      <motion.div 
+        className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent/10 rounded-full blur-3xl"
+        animate={{ 
+          scale: [1, 1.15, 1],
+          opacity: [0.1, 0.2, 0.1]
+        }}
+        transition={{ 
+          duration: 6,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+      />
       
       <div className="container relative z-10 px-4 py-20 md:py-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 mb-8 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+          <motion.div 
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+          >
             <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
             <span className="text-sm text-primary-foreground/80">Bangalore-based Digital Marketing Agency</span>
-          </div>
+          </motion.div>
           
           {/* Main heading */}
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
+          <motion.h1 
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground leading-tight mb-6"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             We Help Local Businesses Get More Leads Through{" "}
             <span className="text-accent">Clear, High-Converting Websites</span>
-          </h1>
+          </motion.h1>
           
           {/* Subheading */}
-          <p className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-8 leading-relaxed animate-fade-up" style={{ animationDelay: '0.3s' }}>
+          <motion.p 
+            className="text-lg md:text-xl text-primary-foreground/70 max-w-2xl mx-auto mb-8 leading-relaxed"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+          >
             Done-for-you websites and digital marketing for business owners who want results, not confusion.
-          </p>
+          </motion.p>
           
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up" style={{ animationDelay: '0.4s' }}>
+          <motion.div 
+            className="flex flex-col sm:flex-row gap-4 justify-center"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             <Button variant="hero" size="xl" className="group" asChild>
               <Link to="/contact">
                 Book a Free Discovery Call
@@ -54,7 +98,7 @@ const Hero = () => {
                 View Our Services
               </Link>
             </Button>
-          </div>
+          </motion.div>
         </div>
       </div>
       
